@@ -16,7 +16,7 @@ const contextGlobal = createContext()
 const initialDentistState = {
   dentistsList: [],
   dentist: {},
-  dentistLike :[],
+  dentistLike :JSON.parse(localStorage.getItem('dentistLikeStorage'))||[],
   dentistTheme : true
   
  
@@ -31,8 +31,8 @@ const dentistReducer = (state, action) => {
       case 'GET_DENTIST': 
           return {...state, dentist: action.payload}
      
-      case 'DENTIST_LIKE':
-           return {...state, dentistLike:action.payload}
+      // case 'DENTIST_LIKE':
+      //      return {...state, dentistLike:action.payload}
            
       case 'THEME': 
            return {...state, dentistTheme: action.payload}                

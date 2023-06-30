@@ -10,12 +10,17 @@ import { usecontextGlobal } from '../Components/utils/GlobalContext'
 const Card = ({ name, username, id }) => {
   // const {dentistDispatch} = usecontextGlobal()
   const {dentistState,dentistDispatch} = usecontextGlobal()
-  const addFav = (event)=>{
-    const dentistSelect = event.target.value
+  const addFav = ()=>{
 
-    return dentistDispatch({type:'DENTIST_LIKE', payload: dentistState.dentistsList.filter(dentist =>dentist.id==id)})
+    const storage = localStorage.getItem("favs");
+    const listFavs = storage ? JSON.parse(storage) : [];
+    listFavs.push({ id: id, username:username, name:name });
+    localStorage.setItem('favs', JSON.stringify(listFavs));
+
+    // return dentistDispatch({type:'DENTIST_LIKE', payload:listFavs.id})
 
   }
+  
 
   return (
     
@@ -30,7 +35,7 @@ const Card = ({ name, username, id }) => {
         {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
         {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
         </Link>
-        <button onClick={addFav} value ={id} className="favButton">Add fav ⭐</button>
+        <button onClick={addFav} className="favButton">Add fav ⭐</button>
       </div>   
       
   )
