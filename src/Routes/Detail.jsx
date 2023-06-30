@@ -1,18 +1,54 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+import axios from 'axios'
 import React from 'react'
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { usecontextGlobal } from '../Components/utils/GlobalContext'
 
-
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Detail = () => {
- 
-  // Consumiendo el parametro dinamico de la URL deberan hacer un fetch a un user en especifico
+    const {dentistState, dentistDispatch} = usecontextGlobal()
+  
+    const params = useParams()
+
+   
+    console.log(params.id)
+   
+  const url = `https://jsonplaceholder.typicode.com/users/${params.id}`
+
+    
+    useEffect(() => {
+        axios(url)
+        .then(res => {
+            console.log(res)
+           dentistDispatch({type: 'GET_DENTIST', payload: res.data})
+        })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [url])
+    
 
   return (
-    <>
-      <h1>Detail Dentist id </h1>
-      {/* aqui deberan renderizar la informacion en detalle de un user en especifico */}
-      {/* Deberan mostrar el name - email - phone - website por cada user en especifico */}
-    </>
+ 
+    <div className='card-grid'>
+   
+      <table>
+        <tr>
+          <td>Name</td>
+          <td>Email</td>
+          <td>Website</td></tr>
+        <tr>
+        <td>
+       <h1>{dentistState.dentist.name}</h1></td> 
+       <td>
+       <h2>{dentistState.dentist.email}</h2> </td>
+       <td>
+       <h3>{dentistState.dentist.website}</h3> </td>
+       </tr>
+       </table>
+ 
+    </div>
+
   )
 }
 
