@@ -14,7 +14,7 @@ const Home = () => {
       <h1>Home</h1>
       <div className='card-grid'>
         {/* Aqui deberias renderizar las cards */}
-        {dentistState.dentistsList.map(dentist => (<Card name={dentist.name} id ={dentist.id} username ={dentist.username} key ={dentist.id}/>))}
+        {dentistState.dentistsList.map(dentist => (<Card dentist={dentist} key ={dentist.id}/>))}
       </div>
     </main>
   )

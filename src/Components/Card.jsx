@@ -14,9 +14,13 @@ const Card = ({ name, username, id }) => {
 
     const storage = localStorage.getItem("favs");
     const listFavs = storage ? JSON.parse(storage) : [];
+  
     listFavs.push({ id: id, username:username, name:name });
+ 
     localStorage.setItem('favs', JSON.stringify(listFavs));
 
+    
+  
     // return dentistDispatch({type:'DENTIST_LIKE', payload:listFavs.id})
 
   }

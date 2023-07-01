@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { usecontextGlobal } from '../Components/utils/GlobalContext'
 function Favs() {
   const storage = JSON.parse(localStorage.getItem('favs'))
+
   // const {dentistState} = usecontextGlobal()
 // eslint-disable-next-line no-unused-vars
 
@@ -20,7 +21,10 @@ function Favs() {
        <ul>
     
         {/* Aqui deberias renderizar las cards */}
-        {storage?.map(fav => <Link key={fav.id} to={'/detalle/' + fav.id}>
+      
+
+       {storage.map(fav => 
+       <Link key={fav.id} to={'/detalle/' + fav.id}>
         <li>{fav.name}</li>
         </Link>)}
         </ul>
